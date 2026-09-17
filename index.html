@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant Menu</title>
+</head>
+
+<body onload="loadMenu()">
+
+    <h1>Add Movie</h1>
+        <form action="" id="new_movie_form">
+            <input type="text" id="mtitlef" name="mtitlef" placeholder="Title">
+            <input type="text" id="mgenref" name="mgenref" placeholder="Genre">
+            <input type="number" id="myearf" name="myearf" placeholder="Year">
+            <input type="submit" value="Add Movie">
+        </form>
+
+    <h1>Movies</h1>
+
+    <table id="menuList" border="1px solid black"></table>
+
+    <script>
+        async function loadMenu(){
+
+            const response = await fetch("api/menu");
+            const movie_list = await response.json();
+            const movie_table = document.getElementById("menuList");
+
+            movie_table.innerHTML = "<tr><th>ID</th><th>Title</th><th>Genre</th><th>Year</th></tr>";
+
+            movie_list.forEach(item=>{
+                const movie = document.createElement("tr");
+
+                const movie_id = document.createElement("td");
+                movie_id.textContent = item.id
+
+                const movie_title = document.createElement("td");
+                movie_title.textContent = item.title
+
+                const movie_genre = document.createElement("td");
+                movie_genre.textContent = item.genre
+
+                const movie_year = document.createElement("td");
+                movie_year.textContent = item.year
+
+                movie.appendChild(movie_id);
+                movie.appendChild(movie_title);
+                movie.appendChild(movie_genre);
+                movie.appendChild(movie_year);
+
+                movie_table.appendChild(movie);
+
+            });
+        }
+
+        const form = document.getElementById("new_movie_form");
+        form.addEventListener("submit", h)
+    </script>
+
+</body>
+</html>
